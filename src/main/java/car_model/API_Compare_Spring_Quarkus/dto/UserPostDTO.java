@@ -1,7 +1,7 @@
 package car_model.API_Compare_Spring_Quarkus.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -19,10 +19,10 @@ public class UserPostDTO {
     @Size(message = "The password must have at least 5 characters", min = 5)
     private String password;
 
-    private String role;
+    private boolean admin; // This field represents whether the user is an admin act like a toggle
 
-    public boolean isAdmin() {
-        return "ROLE_ADMIN".equals(role);  // Checks if the role is ADMIN
+    @JsonIgnore //Must be hidden in the swagger
+    public String getRoles() {
+        return isAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
     }
-
 }

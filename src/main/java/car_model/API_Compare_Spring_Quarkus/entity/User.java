@@ -1,6 +1,7 @@
 package car_model.API_Compare_Spring_Quarkus.entity;
 
 import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,10 +33,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private Set<String> roles = new HashSet<>();
+    private String roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

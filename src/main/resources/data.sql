@@ -1,10 +1,7 @@
--- Insert a initial user --
-INSERT INTO "user" (username, password)
-VALUES ('kenzi', 'eyJhbGciOiJIUzUxMiJ9.eyJVc2VybmFtZSI6ImtlbnppIiwiUm9sZXMiOiJST0xFX0FETUlOIn0.n6N7uPJHX4N9a-Plc6kcKuTkw8gyVGgPg29GCBqAYsroydWVRU0EFXz8X462dDxSkDHJ7A9ABB_Ufk7S0u8Ctg
-');
--- Insert roles into the user_roles table --
-INSERT INTO user_roles (user_id, role)
-VALUES (1, 'ROLE_ADMIN');
+-- Insert an initial user with an admin role --
+INSERT INTO "user" (username, password, role)
+VALUES ('kenzi', '$2a$10$wjv7.1y6eTCS6TJ1c0BR9.jj0Wz2vesfFTjo/CERqXM5kfZ9iM0Sq', 'ROLE_ADMIN');
+
 
 -- Insert Brand --
 INSERT INTO brand (name, slug)

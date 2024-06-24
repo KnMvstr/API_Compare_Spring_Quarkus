@@ -2,13 +2,12 @@ package car_model.API_Compare_Spring_Quarkus.security;
 
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
-
 import static java.lang.String.format;
 
 @Component
 public class JwtTokenUtil {
+
     private final String jwtSecret = "It should work eventually";
 
     public String generateAccessToken(String username, String authorities) {
@@ -31,8 +30,8 @@ public class JwtTokenUtil {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
-        } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
+        } catch (JwtException ex){
+        System.out.println(ex.getMessage());
         }
         return false;
     }

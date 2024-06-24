@@ -14,13 +14,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @Component
 @EnableWebSecurity
 @AllArgsConstructor
 @EnableMethodSecurity(securedEnabled = true)
-public class SecurityConfig  {
+public class SecurityConfig {
     private BCryptPasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
     private JwtTokenFilter jwtTokenFilter;
@@ -32,15 +33,17 @@ public class SecurityConfig  {
                 .securityMatcher("/api/v1/**")
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth ->
-                                auth
-                                        .requestMatchers("/api/v1/**").permitAll()
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)  // Add JWT filter
+                .authorizeHttpRequests(
+                        auth -> auth
+                                .requestMatchers("/api/v1/**").permitAll()
 //                                        .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
 //                                        .requestMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
 //                                        .requestMatchers(HttpMethod.PUT, "/api/v1/**").permitAll()
 //                                        .requestMatchers(HttpMethod.DELETE, "/api/v1/**").permitAll()
-                )
-        ;
+                                .anyRequest().authenticated()
+
+                );
         return http.build();
     }
 
