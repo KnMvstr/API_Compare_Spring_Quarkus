@@ -25,7 +25,7 @@ public class Color {
     @JsonView(JsonViews.Color.class)
     private int id;
 
-    @JsonView(JsonViews.Color.class)
+    @JsonView(JsonViews.ColorMin.class)
     private String name;
 
     @JsonView(JsonViews.ColorAdd.class)

@@ -1,6 +1,8 @@
 package car_model.API_Compare_Spring_Quarkus.dto;
 
 import car_model.API_Compare_Spring_Quarkus.entity.*;
+import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ public class ModelDTO {
 
     private List<Color> colors;
 
+    @JsonView(JsonViews.EngineMin.class)
     private Engine engine;
 
     private List<CarType> carTypes;

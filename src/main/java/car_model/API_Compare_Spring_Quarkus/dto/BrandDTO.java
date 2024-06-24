@@ -14,7 +14,4 @@ import java.util.List;
 public class BrandDTO {
     @NotBlank(message = "Specify the name of the brand")
     private String name;
-
-    private List<Model> models;
-
 }

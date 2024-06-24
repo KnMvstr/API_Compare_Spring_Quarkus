@@ -26,9 +26,10 @@ public class Model implements SluggerInterface {
     @JsonView(JsonViews.Model.class)
     private Long id;
 
-    @JsonView(JsonViews.Model.class)
+    @JsonView(JsonViews.ModelMin.class)
     private String name;
 
+    @JsonIgnore
     private String slug;
 
     @ManyToOne
@@ -67,6 +68,7 @@ public class Model implements SluggerInterface {
     private Set<Transmission> transmissions;
 
     @Override
+    @JsonIgnore
     public String getField() {
         return name;
     }

@@ -13,6 +13,4 @@ import java.util.List;
 public class CarTypeDTO {
     @NotBlank(message = "Specify the car type")
     private String name;
-
-    private List<Model> models;
 }

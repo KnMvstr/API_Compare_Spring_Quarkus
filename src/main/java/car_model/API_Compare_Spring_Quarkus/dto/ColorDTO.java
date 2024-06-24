@@ -19,6 +19,4 @@ public class ColorDTO {
 
     @NotBlank(message = "Specify the HEX equivalent")
     private String hexRef;
-
-    private List<Model> models;
 }

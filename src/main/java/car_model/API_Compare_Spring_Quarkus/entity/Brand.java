@@ -3,7 +3,7 @@ package car_model.API_Compare_Spring_Quarkus.entity;
 import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
 import car_model.API_Compare_Spring_Quarkus.utils.SluggerInterface;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -28,9 +28,10 @@ public class Brand implements SluggerInterface {
     @JsonView(JsonViews.Brand.class)
     private Long id;
 
-    @JsonView(JsonViews.Brand.class)
+    @JsonView(JsonViews.BrandMin.class)
     private String name;
 
+    @JsonIgnore
     private String slug;
 
     @OneToMany(mappedBy = "brand")
@@ -38,6 +39,7 @@ public class Brand implements SluggerInterface {
     private List<Model> models = new ArrayList<>();
 
     @Override
+    @JsonIgnore
     public String getField() {
         return name;
     }

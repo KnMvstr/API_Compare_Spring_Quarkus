@@ -14,11 +14,10 @@ public class EngineDTO {
     @NotBlank(message = "Specify the engine reference")
     private String name;
 
+    @NotBlank(message = "Specify the power")
     private String power;
 
     private FuelType fuelType;
-
-    private List<Model> models;
 
     public enum FuelType {
         HYDROGENE, GASOLINE, ELECTRIC, ETHANOL, HOLY_WATER, DIESEL, HYBRID;
