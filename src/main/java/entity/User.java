@@ -30,9 +30,13 @@ public class User extends PanacheEntityBase {
 
     private String roles;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_name"))
-    private Set<Role> roles = new HashSet<>();
+    public static User findByUsername(String username) {
+        return find("username", username).firstResult();
+    }
+
+    public static boolean existsByUsername(String username) {
+        return find("username", username).count() > 0;
+    }
+
+
 }
