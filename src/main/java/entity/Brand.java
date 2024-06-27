@@ -2,7 +2,6 @@ package entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,6 +30,7 @@ public class Brand {
     @JsonIgnore
     private String slug;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+    // FetchEager is mandatory
     private List<Model> models = new ArrayList<>();
 }
