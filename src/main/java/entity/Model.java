@@ -21,14 +21,12 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Model extends PanacheEntityBase implements SluggerInterface {
+public class Model extends PanacheEntityBase  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonView(JsonViews.Model.class)
     private Long id;
 
-    @JsonView(JsonViews.ModelMin.class)
     private String name;
 
     @JsonIgnore
@@ -36,7 +34,6 @@ public class Model extends PanacheEntityBase implements SluggerInterface {
 
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
-    @JsonView(JsonViews.ModelPlus.class)
     private Brand brand;
 
     @ManyToMany
@@ -45,12 +42,10 @@ public class Model extends PanacheEntityBase implements SluggerInterface {
             joinColumns = @JoinColumn(name = "model_id"),
             inverseJoinColumns = @JoinColumn(name = "color_id")
     )
-    @JsonView(JsonViews.ModelPlus.class)
     private List<Color> colors = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "engine_id", nullable = false)
-    @JsonView(JsonViews.ModelPlus.class)
     private Engine engine;
 
     @ManyToMany
@@ -59,21 +54,13 @@ public class Model extends PanacheEntityBase implements SluggerInterface {
             joinColumns = @JoinColumn(name = "model_id"),
             inverseJoinColumns = @JoinColumn(name = "carType_id")
     )
-    @JsonView(JsonViews.ModelPlus.class)
     private List<CarType> carTypes = new ArrayList<>();
 
     @ElementCollection(targetClass = Transmission.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "car_transmissions", joinColumns = @JoinColumn(name = "car_id"))
     @Column(name = "transmission")
-    @JsonView(JsonViews.ModelPlus.class)
     private Set<Transmission> transmissions;
-
-    @Override
-    @JsonIgnore
-    public String getField() {
-        return name;
-    }
 
     public enum Transmission {
         MANUAL, TORQUE, SEMI_AUTOMATIC, DUAL_CLUTCH, TRIPTONIC, CVT

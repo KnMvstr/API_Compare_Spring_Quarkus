@@ -21,7 +21,6 @@ public class User extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonView(JsonViews.Brand.class)
     private Long id;
 
     private String username;

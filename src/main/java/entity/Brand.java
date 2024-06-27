@@ -20,26 +20,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Brand implements SluggerInterface {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonView(JsonViews.Brand.class)
     private Long id;
 
-    @JsonView(JsonViews.BrandMin.class)
     private String name;
 
     @JsonIgnore
     private String slug;
 
     @OneToMany(mappedBy = "brand")
-    @JsonView(JsonViews.BrandPlus.class)
     private List<Model> models = new ArrayList<>();
-
-    @Override
-    @JsonIgnore
-    public String getField() {
-        return name;
-    }
 }
