@@ -11,15 +11,15 @@ WHERE NOT EXISTS (
 );
 
 -- Insert car type --
-INSERT INTO car_type (name, slug)
+INSERT INTO cartype (name, slug)
 SELECT name, LOWER(name) FROM (VALUES ('Sedan'), ('SUV'), ('Hatchback'), ('Convertible'), ('Coupe')
                               ) AS v(name)
 WHERE NOT EXISTS (
-    SELECT 1 FROM car_type WHERE name = v.name
+    SELECT 1 FROM cartype WHERE name = v.name
 );
 
 -- Insert engine --
-INSERT INTO engine (name, power, fuel_type)
+INSERT INTO engine (name, power, fueltype)
 SELECT name, power, fuel_type FROM (VALUES
                                         ('1.6L', '120hp', 1),
                                         ('2.0L', '150hp', 1),
@@ -38,11 +38,11 @@ SELECT name, power, fuel_type FROM (VALUES
                                    ) AS proposed (name, power, fuel_type)
 WHERE NOT EXISTS (
     SELECT 1 FROM engine
-    WHERE name = proposed.name AND power = proposed.power AND fuel_type = proposed.fuel_type
+    WHERE name = proposed.name AND power = proposed.power AND fueltype = proposed.fuel_type
 );
 
 -- Insert color RVB et HEX --
-INSERT INTO color (name, rvb_ref, hex_ref)
+INSERT INTO color (name, rvbref, hexref)
 SELECT * FROM (VALUES ('Black', '0,0,0', '#000000'), ('White', '255,255,255', '#FFFFFF'),
                       ('Silver', '192,192,192', '#C0C0C0'), ('Gray', '128,128,128', '#808080'),
                       ('Red', '255,0,0', '#FF0000'), ('Blue', '0,0,255', '#0000FF'),
@@ -59,7 +59,7 @@ SELECT * FROM (VALUES ('Black', '0,0,0', '#000000'), ('White', '255,255,255', '#
                       ('Charcoal', '54,69,79', '#36454F')
               ) AS v(name, rvb_ref, hex_ref)
 WHERE NOT EXISTS (
-    SELECT 1 FROM color WHERE name = v.name AND rvb_ref = v.rvb_ref AND hex_ref = v.hex_ref
+    SELECT 1 FROM color WHERE name = v.name AND rvbref = v.rvb_ref AND hexref = v.hex_ref
 );
 
 -- Insert models depending on brand --
@@ -141,10 +141,10 @@ FROM model m,
      LATERAL (SELECT id FROM color ORDER BY random() LIMIT 3) c;
 
 -- Insert car types (Tesla models are always Sedan) --
-INSERT INTO model_car_type (model_id, car_type_id)
+INSERT INTO model_cartype (model_id, cartype_id)
 SELECT m.id,
        CASE
            WHEN m.name IN ('Model S', 'Model 3', 'Model X', 'Model Y') THEN 1
            ELSE (random() * 4 + 1)::int
-           END AS car_type_id
+           END AS cartype_id
 FROM model m;
