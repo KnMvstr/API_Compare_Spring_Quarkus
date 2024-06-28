@@ -54,6 +54,8 @@ public class BrandService {
         brandRepository.delete(brand);
     }
 
+    // In our configuration it is mandatory to convert our plain object into a DTO.
+    // We avoid the LazyLoading exception throw due to our relations between entities.
     private BrandDTO toDTO(Brand brand) {
         BrandDTO dto = new BrandDTO();
         dto.setId(brand.getId());
