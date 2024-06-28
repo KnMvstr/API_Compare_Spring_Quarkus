@@ -1,8 +1,11 @@
 package service;
 
+import dto.BrandDTO;
 import dto.CarTypeDTO;
+import entity.Brand;
 import entity.CarType;
 import entity.CarType;
+import entity.Model;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,6 +14,7 @@ import lombok.AllArgsConstructor;
 import repository.CarTypeRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @AllArgsConstructor
@@ -18,20 +22,21 @@ import java.util.List;
 public class CarTypeService {
     CarTypeRepository carTypeRepository;
 
-    public List<CarType> getAllCarTypes() {
-        return carTypeRepository.listAll(Sort.by("name"));
+    public List<CarTypeDTO> getAllCarTypes() {
+        List<CarType> carTypes = carTypeRepository.listAll(Sort.by("name"));
+        return carTypes.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public CarType getCarTypeById(Long id) {
+    public CarTypeDTO getCarTypeById(Long id) {
         CarType carType = carTypeRepository.findById(id);
         if (carType == null) {
             throw new EntityNotFoundException("Could not find carType with id: " + id);
         }
-        return carType;
+        return toDTO(carType);
     }
 
 
-    public CarType persist(CarTypeDTO carTypeDTO, Long id) {
+    public CarTypeDTO persist(CarTypeDTO carTypeDTO, Long id) {
         CarType carType;
         if (id != null) {
             carType = carTypeRepository.findById(id);
@@ -43,7 +48,7 @@ public class CarTypeService {
         }
         carType.setName(carTypeDTO.getName());
         carTypeRepository.persist(carType);
-        return carType;
+        return toDTO(carType);
     }
 
     public void delete(Long id) {
@@ -52,6 +57,18 @@ public class CarTypeService {
             throw new EntityNotFoundException("Could not find carType with id: " + id);
         }
         carTypeRepository.delete(carType);
+    }
+
+    private CarTypeDTO toDTO(CarType carType) {
+        CarTypeDTO dto = new CarTypeDTO();
+        dto.setId(carType.getId());
+        dto.setName(carType.getName());
+        // The brand must return the list of model linked
+        List<String> modelNames = carType.getModels().stream()
+                .map(Model::getName)
+                .collect(Collectors.toList());
+        dto.setModelNames(modelNames);
+        return dto;
     }
 
 }

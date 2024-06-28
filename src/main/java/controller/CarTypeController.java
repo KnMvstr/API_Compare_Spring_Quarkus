@@ -24,21 +24,21 @@ public class CarTypeController {
     @GET
     @Path("/{id}")
     public Response getCartypeById(@PathParam("id") Long id) {
-        CarType carType = carTypeService.getCarTypeById(id);
+        CarTypeDTO carType = carTypeService.getCarTypeById(id);
         return Response.ok(carType).build();
     }
 
     @POST
     @Path("/create")
     public Response createCartype(@Valid CarTypeDTO carType) {
-        CarType newCartype = carTypeService.persist(carType, null);
+        CarTypeDTO newCartype = carTypeService.persist(carType, null);
         return Response.status(Response.Status.CREATED).entity(newCartype).build();
     }
 
     @PUT
     @Path("/edit/{id}")
     public Response updateCartype(@PathParam("id") Long id, @Valid CarTypeDTO carType) {
-        CarType updatedCartype = carTypeService.persist(carType, id);
+        CarTypeDTO updatedCartype = carTypeService.persist(carType, id);
         return Response.status(Response.Status.ACCEPTED).entity(updatedCartype).build();
     }
 
