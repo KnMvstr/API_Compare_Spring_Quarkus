@@ -24,19 +24,15 @@ public class Engine extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     private String name;
 
     private String power;
 
+    @Enumerated(EnumType.STRING)
     private FuelType fuelType;
-
 
     @OneToMany(mappedBy = "engine", fetch = FetchType.EAGER)
     private List<Model> models = new ArrayList<>();
-
-    public enum FuelType {
-        HYDROGENE, GASOLINE, ELECTRIC, ETHANOL, HOLY_WATER, DIESEL, HYBRID;
-    }
 }

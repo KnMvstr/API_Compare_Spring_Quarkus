@@ -24,21 +24,21 @@ public class EngineController {
     @GET
     @Path("/{id}")
     public Response getEngineById(@PathParam("id") Long id) {
-        Engine engine = engineService.getEngineById(id);
+        EngineDTO engine = engineService.getEngineById(id);
         return Response.ok(engine).build();
     }
 
     @POST
     @Path("/create")
     public Response createEngine(@Valid EngineDTO engine) {
-        Engine newEngine = engineService.persist(engine, null);
+        EngineDTO newEngine = engineService.persist(engine, null);
         return Response.status(Response.Status.CREATED).entity(newEngine).build();
     }
 
     @PUT
     @Path("/edit/{id}")
     public Response updateEngine(@PathParam("id") Long id, @Valid EngineDTO engine) {
-        Engine updatedEngine = engineService.persist(engine, id);
+        EngineDTO updatedEngine = engineService.persist(engine, id);
         return Response.status(Response.Status.ACCEPTED).entity(updatedEngine).build();
     }
 

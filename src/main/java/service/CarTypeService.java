@@ -63,7 +63,7 @@ public class CarTypeService {
         CarTypeDTO dto = new CarTypeDTO();
         dto.setId(carType.getId());
         dto.setName(carType.getName());
-        // The brand must return the list of model linked
+        // The cartype must return the list of model linked
         List<String> modelNames = carType.getModels().stream()
                 .map(Model::getName)
                 .collect(Collectors.toList());
