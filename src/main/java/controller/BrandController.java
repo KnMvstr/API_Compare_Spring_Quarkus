@@ -25,21 +25,21 @@ public class BrandController {
     @GET
     @Path("/{id}")
     public Response getBrandById(@PathParam("id") Long id) {
-        Brand brand = brandService.getBrandById(id);
+        BrandDTO brand = brandService.getBrandById(id);
         return Response.ok(brand).build();
     }
 
     @POST
     @Path("/create")
     public Response createBrand(@Valid BrandDTO brand) {
-        Brand newBrand = brandService.persist(brand, null);
+        BrandDTO newBrand = brandService.persist(brand, null);
         return Response.status(Response.Status.CREATED).entity(newBrand).build();
     }
 
     @PUT
     @Path("/edit/{id}")
     public Response updateBrand(@PathParam("id") Long id, @Valid BrandDTO brand) {
-        Brand updatedBrand = brandService.persist(brand, id);
+        BrandDTO updatedBrand = brandService.persist(brand, id);
         return Response.status(Response.Status.ACCEPTED).entity(updatedBrand).build();
     }
 

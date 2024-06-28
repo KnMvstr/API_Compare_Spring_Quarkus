@@ -2,6 +2,7 @@ package service;
 
 import dto.BrandDTO;
 import entity.Brand;
+import entity.Model;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
@@ -9,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import repository.BrandRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @AllArgsConstructor
@@ -16,19 +18,20 @@ import java.util.List;
 public class BrandService {
     BrandRepository brandRepository;
 
-    public List<Brand> getAllBrands() {
-        return brandRepository.listAll(Sort.by("name"));
+    public List<BrandDTO> getAllBrands() {
+        List<Brand> brands = brandRepository.listAll(Sort.by("name"));
+        return brands.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public Brand getBrandById(Long id) {
+    public BrandDTO getBrandById(Long id) {
         Brand brand = brandRepository.findById(id);
         if (brand == null) {
             throw new EntityNotFoundException("Could not find brand with id: " + id);
         }
-        return brand;
+        return toDTO(brand);
     }
 
-    public Brand persist(BrandDTO brandDTO, Long id) {
+    public BrandDTO persist(BrandDTO brandDTO, Long id) {
         Brand brand;
         if (id != null) {
             brand = brandRepository.findById(id);
@@ -40,7 +43,7 @@ public class BrandService {
         }
         brand.setName(brandDTO.getName());
         brandRepository.persist(brand);
-        return brand;
+        return toDTO(brand);
     }
 
     public void delete(Long id) {
@@ -49,5 +52,17 @@ public class BrandService {
             throw new EntityNotFoundException("Could not find brand with id: " + id);
         }
         brandRepository.delete(brand);
+    }
+
+    private BrandDTO toDTO(Brand brand) {
+        BrandDTO dto = new BrandDTO();
+        dto.setId(brand.getId());
+        dto.setName(brand.getName());
+        // The brand must return the list of model linked
+        List<String> modelNames = brand.getModels().stream()
+                .map(Model::getName)
+                .collect(Collectors.toList());
+        dto.setModelNames(modelNames);
+        return dto;
     }
 }
