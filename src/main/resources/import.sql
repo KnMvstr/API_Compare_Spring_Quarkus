@@ -20,25 +20,25 @@ WHERE NOT EXISTS (
 
 -- Insert engine --
 INSERT INTO engine (name, power, fueltype)
-SELECT name, power, fuel_type FROM (VALUES
-                                        ('1.6L', '120hp', 1),
-                                        ('2.0L', '150hp', 1),
-                                        ('2.2L', '180hp', 5),
-                                        ('2.6L', '180hp', 0),
-                                        ('3.0L', '250hp', 5),
-                                        ('2.1L', '200hp', 3),
-                                        ('1.5L Hybrid', '130hp', 6),
-                                        ('2.5L', '200hp', 4),
-                                        ('80kW', '150hp', 2),
-                                        ('3.3L', '280hp', 0),
-                                        ('3.5L', '300hp', 1),
-                                        ('4.0L Turbo', '400hp', 1),
-                                        ('2.0L Turbo Hybrid', '220hp', 6),
-                                        ('200kW', '270hp', 2)
-                                   ) AS proposed (name, power, fuel_type)
+SELECT name, power, fueltype FROM (VALUES
+                                       ('1.6L', '120hp', 'GASOLINE'),
+                                       ('2.0L', '150hp', 'GASOLINE'),
+                                       ('2.2L', '180hp', 'ETHANOL'),
+                                       ('2.6L', '180hp', 'HYDROGENE'),
+                                       ('3.0L', '250hp', 'ETHANOL'),
+                                       ('2.1L', '200hp', 'ELECTRIC'),
+                                       ('1.5L Hybrid', '130hp', 'HYBRID'),
+                                       ('2.5L', '200hp', 'DIESEL'),
+                                       ('80kW', '150hp', 'ELECTRIC'),
+                                       ('3.3L', '280hp', 'HYDROGENE'),
+                                       ('3.5L', '300hp', 'GASOLINE'),
+                                       ('4.0L Turbo', '400hp', 'GASOLINE'),
+                                       ('2.0L Turbo Hybrid', '220hp', 'HYBRID'),
+                                       ('200kW', '270hp', 'ELECTRIC')
+                                  ) AS proposed (name, power, fueltype)
 WHERE NOT EXISTS (
     SELECT 1 FROM engine
-    WHERE name = proposed.name AND power = proposed.power AND fueltype = proposed.fuel_type
+    WHERE name = proposed.name AND power = proposed.power AND fueltype = proposed.fueltype
 );
 
 -- Insert color RVB et HEX --
