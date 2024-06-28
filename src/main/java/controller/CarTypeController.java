@@ -1,7 +1,6 @@
 package controller;
 
 import dto.CarTypeDTO;
-import entity.CarType;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;

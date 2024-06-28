@@ -1,7 +1,6 @@
 package controller;
 
 import dto.BrandDTO;
-import entity.Brand;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
