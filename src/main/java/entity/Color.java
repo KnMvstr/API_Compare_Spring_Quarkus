@@ -26,7 +26,7 @@ public class Color extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -34,6 +34,6 @@ public class Color extends PanacheEntityBase {
 
     private String hexRef;
 
-    @ManyToMany(mappedBy = "colors")
+    @ManyToMany(mappedBy = "colors", fetch = FetchType.EAGER)
     private List<Model> models = new ArrayList<>();
 }

@@ -38,7 +38,7 @@ public class Model extends PanacheEntityBase  {
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "model_color",
             joinColumns = @JoinColumn(name = "model_id"),
@@ -50,7 +50,7 @@ public class Model extends PanacheEntityBase  {
     @JoinColumn(name = "engine_id", nullable = false)
     private Engine engine;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "model_carType",
             joinColumns = @JoinColumn(name = "model_id"),

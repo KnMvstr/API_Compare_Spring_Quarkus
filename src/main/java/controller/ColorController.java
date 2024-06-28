@@ -1,7 +1,6 @@
 package controller;
 
 import dto.ColorDTO;
-import entity.Color;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -24,21 +23,21 @@ public class ColorController {
     @GET
     @Path("/{id}")
     public Response getColorById(@PathParam("id") Long id) {
-        Color color = colorService.getColorById(id);
+        ColorDTO color = colorService.getColorById(id);
         return Response.ok(color).build();
     }
 
     @POST
     @Path("/create")
     public Response createColor(@Valid ColorDTO color) {
-        Color newColor = colorService.persist(color, null);
+        ColorDTO newColor = colorService.persist(color, null);
         return Response.status(Response.Status.CREATED).entity(newColor).build();
     }
 
     @PUT
     @Path("/edit/{id}")
     public Response updateColor(@PathParam("id") Long id, @Valid ColorDTO color) {
-        Color updatedColor = colorService.persist(color, id);
+        ColorDTO updatedColor = colorService.persist(color, id);
         return Response.status(Response.Status.ACCEPTED).entity(updatedColor).build();
     }
 
