@@ -33,7 +33,7 @@ public class CarType extends PanacheEntityBase {
     @JsonIgnore
     private String slug;
 
-    @ManyToMany(mappedBy = "carTypes")
+    @ManyToMany(mappedBy = "carTypes", fetch = FetchType.EAGER)
     @Column(name = "carType")
     private List<Model> models = new ArrayList<>();
 }
