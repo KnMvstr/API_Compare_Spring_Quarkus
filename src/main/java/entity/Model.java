@@ -2,7 +2,6 @@ package entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
@@ -34,7 +33,7 @@ public class Model extends PanacheEntityBase  {
     @JsonIgnore
     private String slug;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
@@ -46,7 +45,7 @@ public class Model extends PanacheEntityBase  {
     )
     private List<Color> colors = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "engine_id", nullable = false)
     private Engine engine;
 
@@ -63,8 +62,4 @@ public class Model extends PanacheEntityBase  {
     @CollectionTable(name = "car_transmissions", joinColumns = @JoinColumn(name = "car_id"))
     @Column(name = "transmission")
     private Set<Transmission> transmissions;
-
-    public enum Transmission {
-        MANUAL, TORQUE, SEMI_AUTOMATIC, DUAL_CLUTCH, TRIPTONIC, CVT
-    }
 }
