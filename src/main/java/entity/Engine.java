@@ -18,7 +18,6 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Engine extends PanacheEntityBase {
     @Id
