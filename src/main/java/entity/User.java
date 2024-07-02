@@ -1,23 +1,29 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.security.jpa.Password;
+import io.quarkus.security.jpa.Roles;
+import io.quarkus.security.jpa.UserDefinition;
+import io.quarkus.security.jpa.Username;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Data
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "\"user\"")
+@UserDefinition
 public class User extends PanacheEntityBase {
 
     @Id
@@ -25,19 +31,21 @@ public class User extends PanacheEntityBase {
     @Column(name = "id")
     private Long id;
 
+    @Username
+    // Indicates the field used for the username.
     private String username;
 
+    @Password
+    // Indicates the field used for the password. By default, it uses bcrypt-hashed passwords.
+    // You can configure it to use plain text or custom passwords. @Password(PasswordType.CLEAR)
     private String password;
 
-    private String roles;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
-    public static User findByUsername(String username) {
-        return find("username", username).firstResult();
+    @Roles
+    public String getRoleName() {
+        return role.getName();
     }
-
-    public static boolean existsByUsername(String username) {
-        return find("username", username).count() > 0;
-    }
-
-
 }
