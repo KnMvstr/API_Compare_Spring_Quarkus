@@ -1,12 +1,11 @@
 package dto;
 
-import entity.Role;
-import io.quarkus.security.jpa.Password;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +14,11 @@ public class UserDTO {
     private Long id;
 
     @NotBlank(message = "User must have a name ")
-    @NotNull
     private String username;
 
     @NotBlank(message = "User must have a password")
     private String password;
 
-    @NotBlank(message = "User must have a role")
-    private Role role;
+    @Schema(description = "The role of the user")
+    private RoleDTO role;
 }

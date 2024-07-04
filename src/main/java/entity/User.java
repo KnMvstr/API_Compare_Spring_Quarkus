@@ -33,6 +33,7 @@ public class User extends PanacheEntityBase {
 
     @Username
     // Indicates the field used for the username.
+    @Column(name = "username", length = 15, nullable = false, unique = true)
     private String username;
 
     @Password
@@ -40,7 +41,7 @@ public class User extends PanacheEntityBase {
     // You can configure it to use plain text or custom passwords. @Password(PasswordType.CLEAR)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
