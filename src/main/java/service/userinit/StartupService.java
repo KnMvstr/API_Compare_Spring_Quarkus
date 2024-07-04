@@ -13,7 +13,7 @@ public class StartupService {
     @Transactional
     public void loadUsersAndRoles(@Observes StartupEvent evt) {
         //First check if roles table is empty in DB
-        if (Role.count() == 0){
+        if (Role.count() == 0) {
             // Create role Admin
             Role adminRole = new Role();
             adminRole.setName("ADMIN");
