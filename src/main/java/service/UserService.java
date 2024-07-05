@@ -14,6 +14,7 @@ import repository.RoleRepository;
 import repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -27,6 +28,22 @@ public class UserService {
         List<User> users = userRepository.listAll(Sort.by("username"));
         return users.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
+//    public UserDTO findbyEmail(String email) {
+//        Optional<User> user = userRepository.findByEmail(email);
+//        if (user.isEmpty()) {
+//            throw new EntityNotFoundException("Could not find user with corresponding email : " + email);
+//        }
+//        return toDTO(user.get());
+//    }
+
+//    public UserDTO findbyUsername(String userName) {
+//        Optional<User> user = userRepository.findByUserName(userName);
+//        if (user.isEmpty()) {
+//            throw new EntityNotFoundException("Could not find user with corresponding username : " + userName);
+//        }
+//        return toDTO(user.get());
+//    }
 
     public UserDTO getUserById(Long id) {
         User user = userRepository.findById(id);
@@ -67,7 +84,9 @@ public class UserService {
             throw new EntityNotFoundException("Could not find user with id: " + id);
         }
         user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
+        // Hash the password before setting it
+        String hashedPassword = BcryptUtil.bcryptHash(userDTO.getPassword());
+        user.setPassword(hashedPassword);
 
         // Fetch existing role by name
         Role existingRole = roleRepository.findByName(userDTO.getRole().getName());
@@ -87,6 +106,14 @@ public class UserService {
             throw new EntityNotFoundException("Could not find user with id: " + id);
         }
         userRepository.delete(user);
+    }
+
+    public UserDTO authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user == null || !BcryptUtil.matches(password, user.getPassword())) {
+            return null;
+        }
+        return toDTO(user);
     }
 
     private UserDTO toDTO(User user) {
