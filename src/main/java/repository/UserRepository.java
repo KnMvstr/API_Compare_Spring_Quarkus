@@ -13,6 +13,8 @@ public class UserRepository implements PanacheRepositoryBase<User, Long> {
         return find("username", username).firstResultOptional();
     }
 
+    public Optional<User> findByEmail(String email) {return find("email", email).firstResultOptional();}
+    public Optional<User> findByUserName(String userName) {return find("username", userName).firstResultOptional();}
     public boolean existsByUsername(String username) {
         return find("username", username).count() > 0;
     }
