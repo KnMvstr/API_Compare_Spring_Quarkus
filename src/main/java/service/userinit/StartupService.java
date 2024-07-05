@@ -27,6 +27,7 @@ public class StartupService {
             // Create an admin
             User admin = new User();
             admin.setUsername("kenzi");
+            admin.setEmail("ken@cacao.fr");
             admin.setPassword("$2a$10$wjv7.1y6eTCS6TJ1c0BR9.jj0Wz2vesfFTjo/CERqXM5kfZ9iM0Sq"); // Bcrypt hashed Password
             admin.setRole(adminRole); // link the associated role
             admin.persist();
@@ -34,6 +35,7 @@ public class StartupService {
             // Create a user
             User user = new User();
             user.setUsername("Armand");
+            user.setEmail("armand@lagrinta.fr");
             user.setPassword("$2a$12$aG1FAyN6mQqbu1iyubGUrOYSS6VdQ3aFgw5sHz.xYWBktm4Et7G66"); // Bcrypt hashed Password
             user.setRole(userRole); // link the associated role
             user.persist();
