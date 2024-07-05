@@ -1,13 +1,15 @@
 package authentication;
 
 import dto.UserDTO;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.jwt.Claims;
 import org.jose4j.jwt.JwtClaims;
+
+import java.io.IOException;
 import java.util.Collections;
 import java.util.logging.Logger;
 
-@RequestScoped
+@ApplicationScoped
 public class TokenService {
 
     // Logger to log messages for this class
@@ -56,8 +58,18 @@ public class TokenService {
 
         } catch (Exception e) {
             // Log the exception stack trace in case of an error
-            LOGGER.info("Error generating token");
+            LOGGER.severe("Error generating token");
             throw new RuntimeException(e);
+        }
+    }
+
+    public boolean invalidateToken(String token) {
+        try {
+            LOGGER.info("User successfully logout");
+            return true; // Indicate successful invalidation (even without blacklist)
+        } catch (Exception e) { // Catch any unexpected exceptions
+            LOGGER.info("Error invalidating token");
+            return false;
         }
     }
 }

@@ -16,8 +16,8 @@ public class TokenUtils {
 
     public static String generateTokenString(JwtClaims claims) throws Exception {
         //use the privat key associated with the public key for a valid signature
-        PrivateKey privateKey = KeyUtils.readPrivateKey("/privatekey.pem");
-        return generateTokenString(privateKey, "/privatekey.pem", claims);
+        PrivateKey privateKey = KeyUtils.readPrivateKey("/PrivateKey.pem");
+        return generateTokenString(privateKey, "/PrivateKey.pem", claims);
 
     }
 
