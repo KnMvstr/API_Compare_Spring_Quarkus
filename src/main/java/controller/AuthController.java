@@ -2,13 +2,13 @@ package controller;
 
 import authentication.AuthResponse;
 import authentication.TokenService;
+import dto.UserAuthDTO;
 import dto.UserDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import service.UserService;
-
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
@@ -23,14 +23,13 @@ public class AuthController {
 
     /**
      * Endpoint to authenticate a user and generate a JWT.
-     * @param request The authentication request containing username and password.
      * @return A response containing the JWT or an error message.
      */
     @POST
     @Path("/login")
-    public Response authenticateUser(UserDTO request) {
+    public Response authenticateUser(UserAuthDTO userAuthDTO) {
         try {
-            UserDTO user = userService.authenticate(request.getUsername(), request.getPassword());
+            UserDTO user = userService.authenticate(userAuthDTO);
             if (user == null) {
                 return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid credentials").build();
             }
@@ -48,7 +47,7 @@ public class AuthController {
      */
     @POST
     @Path("/register")
-    public Response registerUser(UserDTO user) {
+    public Response registerUser(UserAuthDTO user) {
         try {
             UserDTO newUser = userService.createUser(user);
             return Response.status(Response.Status.CREATED).entity(newUser).build();
@@ -56,6 +55,16 @@ public class AuthController {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Server error during registration").build();
+        }
+    }
+
+    @POST
+    @Path("/logout")
+    public Response logout(String token) {
+        if (tokenService.invalidateToken(token)) {
+            return Response.ok().build(); // Logout successful
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid token").build();
         }
     }
 }
