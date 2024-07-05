@@ -1,11 +1,13 @@
 package authentication;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class AuthResponse {
-    public String jwttoken;
+    private String jwttoken;
 //    private String refreshToken;
 }
