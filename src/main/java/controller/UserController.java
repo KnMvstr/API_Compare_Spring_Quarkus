@@ -1,6 +1,7 @@
 package controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import dto.UserAuthDTO;
 import dto.UserDTO;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -32,7 +33,7 @@ public class UserController {
 
     @POST
     @Path("/create")
-    public Response createUser(@Valid UserDTO user) {
+    public Response createUser(@Valid UserAuthDTO user) {
         UserDTO newUser = userService.createUser(user);
         return Response.status(Response.Status.CREATED).entity(newUser).build();
     }

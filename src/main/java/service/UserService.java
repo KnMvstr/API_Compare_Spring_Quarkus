@@ -1,6 +1,7 @@
 package service;
 
 import dto.RoleDTO;
+import dto.UserAuthDTO;
 import dto.UserDTO;
 import entity.Role;
 import entity.User;
@@ -53,26 +54,34 @@ public class UserService {
         return toDTO(user);
     }
 
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserAuthDTO userDTO) {
         User user = new User();
         // Check if username already exists
         if (userRepository.existsByUsername(userDTO.getUsername())) {
             throw new IllegalArgumentException("Username already exists: " + userDTO.getUsername());
         }
+        // Set username
         user.setUsername(userDTO.getUsername());
+
+        // Set email from DTO
+        user.setEmail(userDTO.getEmail());
+
         // User password is automatically hashed by Quarkus Security
-        // In our case it didn't get hashed without calling manual Hashing with BcryptUtil
+        // Hashing manually using BcryptUtil as Quarkus didn't hash automatically
         String hashedPassword = BcryptUtil.bcryptHash(userDTO.getPassword());
         user.setPassword(hashedPassword);
-        // Fetch existing role by name
-        Role existingRole = roleRepository.findByName(userDTO.getRole().getName());
-        // Handle role assignment based on existingRole
-        if (existingRole != null) {
-            user.setRole(existingRole);
-        } else {
-            // Handle non-existent role (throw exception or create new role with caution)
-            throw new IllegalArgumentException("Invalid role provided. Please specify 'ADMIN' or 'USER'");
+
+        // Fetch default role 'USER', assuming it always exists.
+        // The role has been pre-loaded during application start-up.
+        Role defaultRole = roleRepository.findByName("USER");
+        if (defaultRole == null) {
+            // If the 'USER' role doesn't exist, we create it
+            defaultRole = new Role();
+            defaultRole.setName("USER");
+            roleRepository.persist(defaultRole);
         }
+        user.setRole(defaultRole);
+
         userRepository.persist(user);
         return toDTO(user);
     }
@@ -108,13 +117,14 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UserDTO authenticate(String username, String password) {
-        User user = userRepository.findByUsername(username).orElse(null);
-        if (user == null || !BcryptUtil.matches(password, user.getPassword())) {
+    public UserDTO authenticate(UserAuthDTO userAuthDTO) {
+        User user = userRepository.findByUsername(userAuthDTO.getUsername()).orElse(null);
+        if (user == null || !BcryptUtil.matches(userAuthDTO.getPassword(), user.getPassword())) {
             return null;
         }
         return toDTO(user);
     }
+
 
     private UserDTO toDTO(User user) {
         UserDTO dto = new UserDTO();
