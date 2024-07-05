@@ -3,6 +3,7 @@ package controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import dto.UserAuthDTO;
 import dto.UserDTO;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -38,6 +39,7 @@ public class UserController {
         return Response.status(Response.Status.CREATED).entity(newUser).build();
     }
 
+    @RolesAllowed({"ADMIN"})
     @PUT
     @Path("/edit/{id}")
     public Response updateUser(@PathParam("id") Long id, @Valid UserDTO user){
@@ -45,6 +47,7 @@ public class UserController {
         return Response.status(Response.Status.ACCEPTED).entity(updatedUser).build();
     }
 
+    @RolesAllowed({"ADMIN"})
     @DELETE
     @Path("/delete/{id}")
     public Response deleteUser(@PathParam("id") Long id) {
