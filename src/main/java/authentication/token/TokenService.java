@@ -1,11 +1,10 @@
-package authentication;
+package authentication.token;
 
 import dto.UserDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.jwt.Claims;
 import org.jose4j.jwt.JwtClaims;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.logging.Logger;
 
@@ -53,7 +52,7 @@ public class TokenService {
             // Log the generated token
             LOGGER.info("TOKEN generated: " + token);
 
-            // Return the generated token
+            // Return the generated toke
             return token;
 
         } catch (Exception e) {
@@ -66,7 +65,7 @@ public class TokenService {
     public boolean invalidateToken(String token) {
         try {
             LOGGER.info("User successfully logout");
-            return true; // Indicate successful invalidation (even without blacklist)
+            return true;
         } catch (Exception e) { // Catch any unexpected exceptions
             LOGGER.info("Error invalidating token");
             return false;

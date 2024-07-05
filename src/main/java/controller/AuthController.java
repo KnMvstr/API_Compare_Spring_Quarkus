@@ -1,7 +1,7 @@
 package controller;
 
 import authentication.AuthResponse;
-import authentication.TokenService;
+import authentication.token.TokenService;
 import dto.UserAuthDTO;
 import dto.UserDTO;
 import jakarta.inject.Inject;

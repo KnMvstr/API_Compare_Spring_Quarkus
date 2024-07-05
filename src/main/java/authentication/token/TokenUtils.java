@@ -1,4 +1,4 @@
-package authentication;
+package authentication.token;
 
 import io.smallrye.jwt.util.KeyUtils;
 import org.eclipse.microprofile.jwt.Claims;
