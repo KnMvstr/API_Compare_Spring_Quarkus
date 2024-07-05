@@ -9,6 +9,7 @@ import io.quarkus.security.jpa.Roles;
 import io.quarkus.security.jpa.UserDefinition;
 import io.quarkus.security.jpa.Username;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,9 @@ public class User extends PanacheEntityBase {
     // Indicates the field used for the username.
     @Column(name = "username", length = 15, nullable = false, unique = true)
     private String username;
+
+    @Email
+    private String email;
 
     @Password
     // Indicates the field used for the password. By default, it uses bcrypt-hashed passwords.
