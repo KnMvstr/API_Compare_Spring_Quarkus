@@ -1,5 +1,5 @@
 -- Insert an initial user with an admin role --
-INSERT INTO "user" (username, password, role)
+INSERT INTO "user" (username, password, roles)
 VALUES ('kenzi', '$2a$10$wjv7.1y6eTCS6TJ1c0BR9.jj0Wz2vesfFTjo/CERqXM5kfZ9iM0Sq', 'ROLE_ADMIN');
 
 
