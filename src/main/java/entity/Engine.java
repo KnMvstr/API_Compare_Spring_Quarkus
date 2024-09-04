@@ -2,6 +2,7 @@ package entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import dto.BrandDTO;
 import dto.EngineDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -35,12 +36,12 @@ public class Engine extends PanacheEntity {
     @OneToMany(mappedBy = "engine", fetch = FetchType.EAGER)
     private List<Model> models = new ArrayList<>();
 
-    public List<EngineDTO> getAllEngines() {
+    public static List<EngineDTO> getAllEngines() {
         List<Engine> engines = Engine.listAll(Sort.by("name"));
         return engines.stream().map(Engine::toDTO).collect(Collectors.toList());
     }
 
-    public EngineDTO getEngineById(Long id) {
+    public static EngineDTO getEngineById(Long id) {
         Engine engine = Engine.findById(id);
         if (engine == null) {
             throw new EntityNotFoundException("Could not find engine with id: " + id);
@@ -74,4 +75,27 @@ public class Engine extends PanacheEntity {
         Engine.deleteById(engine);
     }
 
+    public static Engine fromDTO(EngineDTO dto) {
+        Engine engine = new Engine();
+        engine.name = dto.getName();
+        engine.power = dto.getPower();
+        engine.fuelType = dto.getFuelType();
+        //engine.models = dto.getModelNames();
+        return engine;
+    }
+
+    public void updateFromDTO(EngineDTO dto) {
+        this.name = dto.getName();
+        this.power = dto.getPower();
+        this.fuelType = dto.getFuelType();
+    }
+
+    public static EngineDTO toDTO(Engine engine) {
+        EngineDTO dto = new EngineDTO();
+        dto.setId(engine.id);
+        dto.setName(engine.name);
+        dto.setFuelType(engine.fuelType);
+        dto.setPower(engine.power);
+        return dto;
+    }
 }
