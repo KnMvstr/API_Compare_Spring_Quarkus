@@ -41,6 +41,13 @@ public class Brand extends PanacheEntity {
     private List<Model> models = new ArrayList<>();
 
 
+    // Automatically generate the slug before persisting or updating
+    @PrePersist
+    @PreUpdate
+    public void generateSlug() {
+        Slugify slugify = Slugify.builder().build();
+        this.slug = slugify.slugify(this.name);
+    }
 
     /* Other specificity of using Panache it is recommended to get the usual DDD service layer method inside the entity.
 
