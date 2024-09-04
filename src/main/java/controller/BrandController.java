@@ -22,6 +22,7 @@ import static entity.Brand.toDTO;
 public class BrandController {
 
     @GET
+    @Path("/all")
     public Response getAllBrands() {
         List<BrandDTO> brands = Brand.getAllBrands();
         return Response.ok(brands).build();
@@ -40,6 +41,7 @@ public class BrandController {
 
     @POST
     @Transactional
+    @Path("/create")
     public Response createBrand(BrandDTO brandDTO) {
         try {
             Brand brand = new Brand();
@@ -61,7 +63,7 @@ public class BrandController {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/edit/{id}")
     @Transactional
     public Response updateBrand(@PathParam("id") Long id, @Valid BrandDTO brandDTO) {
         try {
@@ -78,7 +80,7 @@ public class BrandController {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/delete/{id}")
     @Transactional
     public Response deleteBrand(@PathParam("id") Long id) {
         try {
