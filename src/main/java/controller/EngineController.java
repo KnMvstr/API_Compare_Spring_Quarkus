@@ -82,7 +82,7 @@ public class EngineController {
     @Path("/delete/{id}")
     @Transactional
     public Response deleteEngine(@PathParam("id") Long id) {
-        try { 
+        try {
             boolean deleted = Engine.deleteById(id);
             if (!deleted) {
                 throw new EntityNotFoundException("Engine not found with ID: " + id);
