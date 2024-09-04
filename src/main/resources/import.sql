@@ -1,14 +1,30 @@
 -- Insert Brand --
-INSERT INTO brand (name, slug)
-SELECT name, LOWER(name) FROM (
-                                  VALUES ('Toyota'), ('Honda'), ('Ford'), ('Chevrolet'), ('BMW'),
-                                         ('Mercedes'), ('Audi'), ('Tesla'), ('Nissan'), ('Hyundai'),
-                                         ('Kia'), ('Porsche'), ('Jaguar'), ('Lexus'), ('Land Rover'),
-                                         ('Fiat'), ('Mazda'), ('Subaru')
-                              ) AS v(name)
+INSERT INTO brand (id, name, slug)
+SELECT * FROM (
+                  VALUES
+                      (1, 'Toyota', LOWER('Toyota')),
+                      (2, 'Honda', LOWER('Honda')),
+                      (3, 'Ford', LOWER('Ford')),
+                      (4, 'Chevrolet', LOWER('Chevrolet')),
+                      (5, 'BMW', LOWER('BMW')),
+                      (6, 'Mercedes', LOWER('Mercedes')),
+                      (7, 'Audi', LOWER('Audi')),
+                      (8, 'Tesla', LOWER('Tesla')),
+                      (9, 'Nissan', LOWER('Nissan')),
+                      (10, 'Hyundai', LOWER('Hyundai')),
+                      (11, 'Kia', LOWER('Kia')),
+                      (12, 'Porsche', LOWER('Porsche')),
+                      (13, 'Jaguar', LOWER('Jaguar')),
+                      (14, 'Lexus', LOWER('Lexus')),
+                      (15, 'Land Rover', LOWER('Land Rover')),
+                      (16, 'Fiat', LOWER('Fiat')),
+                      (17, 'Mazda', LOWER('Mazda')),
+                      (18, 'Subaru', LOWER('Subaru'))
+              ) AS v(id, name, slug)
 WHERE NOT EXISTS (
     SELECT 1 FROM brand WHERE name = v.name
 );
+
 
 -- Insert car type --
 INSERT INTO cartype (name, slug)
@@ -148,3 +164,6 @@ SELECT m.id,
            ELSE (random() * 4 + 1)::int
            END AS cartype_id
 FROM model m;
+
+-- Reset the sequence, starts counting from the next available integer after the highest ID inserted --
+SELECT setval('Brand_SEQ', COALESCE((SELECT MAX(id)+1 FROM brand), 1), false);
