@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class Brand extends PanacheEntity {
     /* Using the recommended hibernate with Panache I can reduce the boiler plate.
     That way I don't have to specify a Long id as it is done by the extends.
