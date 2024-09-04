@@ -46,12 +46,12 @@ public class CarType extends PanacheEntity {
         this.slug = slugify.slugify(this.name);
     }
 
-    public List<CarTypeDTO> getAllCarTypes() {
+    public static List<CarTypeDTO> getAllCarTypes() {
         List<CarType> carTypes = CarType.listAll(Sort.by("name"));
         return carTypes.stream().map(CarType::toDTO).collect(Collectors.toList());
     }
 
-    public CarTypeDTO getCarTypeById(Long id) {
+    public static CarTypeDTO getCarTypeById(Long id) {
         CarType carType = CarType.findById(id);
         if (carType == null) {
             throw new EntityNotFoundException("Could not find carType with id: " + id);
