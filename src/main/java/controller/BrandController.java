@@ -2,7 +2,6 @@ package controller;
 
 import dto.BrandDTO;
 import entity.Brand;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
@@ -13,8 +12,6 @@ import jakarta.ws.rs.core.Response;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
-
-import static entity.Brand.toDTO;
 
 @Path("/api/v2/brands")
 @Produces(MediaType.APPLICATION_JSON)
