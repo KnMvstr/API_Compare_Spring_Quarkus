@@ -61,7 +61,7 @@ public class EngineService {
     // We avoid the LazyLoading exception throw due to our relations between entities.
     private EngineDTO toDTO(Engine engine) {
         EngineDTO dto = new EngineDTO();
-        dto.setId(engine.getId());
+        dto.setId(engine);
         dto.setName(engine.getName());
         dto.setPower(engine.getPower());
         dto.setFuelType(engine.getFuelType());

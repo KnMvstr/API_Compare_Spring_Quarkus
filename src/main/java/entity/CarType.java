@@ -74,13 +74,6 @@ public class CarType extends PanacheEntity {
         return toDTO(carType);
     }
 
-    public void delete(Long id) {
-        CarType carType = CarType.findById(id);
-        if (carType == null) {
-            throw new EntityNotFoundException("Could not find carType with id: " + id);
-        }
-        CarType.deleteById(carType);
-    }
 
     public static CarType fromDTO(CarTypeDTO dto) {
         CarType carType = new CarType();

@@ -27,9 +27,9 @@ WHERE NOT EXISTS (
 
 
 -- Insert car type --
-INSERT INTO cartype (name, slug)
-SELECT name, LOWER(name) FROM (VALUES ('Sedan'), ('SUV'), ('Hatchback'), ('Convertible'), ('Coupe')
-                              ) AS v(name)
+INSERT INTO cartype (id, name, slug)
+SELECT id, name, LOWER(name) FROM (VALUES (1,'Sedan'), (2,'SUV'), (3,'Hatchback'), (4,'Convertible'), (5,'Coupe'))
+    AS v(id, name)
 WHERE NOT EXISTS (
     SELECT 1 FROM cartype WHERE name = v.name
 );
@@ -58,22 +58,35 @@ WHERE NOT EXISTS (
 );
 
 -- Insert color RVB et HEX --
-INSERT INTO color (name, rvbref, hexref)
-SELECT * FROM (VALUES ('Black', '0,0,0', '#000000'), ('White', '255,255,255', '#FFFFFF'),
-                      ('Silver', '192,192,192', '#C0C0C0'), ('Gray', '128,128,128', '#808080'),
-                      ('Red', '255,0,0', '#FF0000'), ('Blue', '0,0,255', '#0000FF'),
-                      ('Brown', '165,42,42', '#A52A2A'), ('Green', '0,128,0', '#008000'),
-                      ('Beige', '245,245,220', '#F5F5DC'), ('Yellow', '255,255,0', '#FFFF00'),
-                      ('Gold', '255,215,0', '#FFD700'), ('Orange', '255,165,0', '#FFA500'),
-                      ('Purple', '128,0,128', '#800080'), ('Pink', '255,192,203', '#FFC0CB'),
-                      ('Maroon', '128,0,0', '#800000'), ('Lime Green', '50,205,50', '#32CD32'),
-                      ('Cyan', '0,255,255', '#00FFFF'), ('Magenta', '255,0,255', '#FF00FF'),
-                      ('Olive', '128,128,0', '#808000'), ('Navy', '0,0,128', '#000080'),
-                      ('Teal', '0,128,128', '#008080'), ('Aqua', '0,255,255', '#00FFFF'),
-                      ('Mint Green', '152,255,152', '#98FF98'), ('Coral', '255,127,80', '#FF7F50'),
-                      ('Ivory', '255,255,240', '#FFFFF0'), ('Indigo', '75,0,130', '#4B0082'),
-                      ('Charcoal', '54,69,79', '#36454F')
-              ) AS v(name, rvb_ref, hex_ref)
+INSERT INTO color (id, name, rvbref, hexref)
+SELECT * FROM (VALUES (1, 'Black', '0,0,0', '#000000'),
+                      (2, 'White', '255,255,255', '#FFFFFF'),
+                      (3, 'Silver', '192,192,192', '#C0C0C0'),
+                      (4, 'Gray', '128,128,128', '#808080'),
+                      (5, 'Red', '255,0,0', '#FF0000'),
+                      (6, 'Blue', '0,0,255', '#0000FF'),
+                      (7, 'Brown', '165,42,42', '#A52A2A'),
+                      (8, 'Green', '0,128,0', '#008000'),
+                      (9, 'Beige', '245,245,220', '#F5F5DC'),
+                      (10, 'Yellow', '255,255,0', '#FFFF00'),
+                      (11, 'Gold', '255,215,0', '#FFD700'),
+                      (12, 'Orange', '255,165,0', '#FFA500'),
+                      (13, 'Purple', '128,0,128', '#800080'),
+                      (14, 'Pink', '255,192,203', '#FFC0CB'),
+                      (15, 'Maroon', '128,0,0', '#800000'),
+                      (16, 'Lime Green', '50,205,50', '#32CD32'),
+                      (17, 'Cyan', '0,255,255', '#00FFFF'),
+                      (18, 'Magenta', '255,0,255', '#FF00FF'),
+                      (19, 'Olive', '128,128,0', '#808000'),
+                      (20, 'Navy', '0,0,128', '#000080'),
+                      (21, 'Teal', '0,128,128', '#008080'),
+                      (22, 'Aqua', '0,255,255', '#00FFFF'),
+                      (23, 'Mint Green', '152,255,152', '#98FF98'),
+                      (24, 'Coral', '255,127,80', '#FF7F50'),
+                      (25, 'Ivory', '255,255,240', '#FFFFF0'),
+                      (26, 'Indigo', '75,0,130', '#4B0082'),
+                      (27, 'Charcoal', '54,69,79', '#36454F')
+              ) AS v(id, name, rvb_ref, hex_ref)
 WHERE NOT EXISTS (
     SELECT 1 FROM color WHERE name = v.name AND rvbref = v.rvb_ref AND hexref = v.hex_ref
 );
@@ -167,3 +180,7 @@ FROM model m;
 
 -- Reset the sequence, starts counting from the next available integer after the highest ID inserted --
 SELECT setval('Brand_SEQ', COALESCE((SELECT MAX(id)+1 FROM brand), 1), false);
+SELECT setval('CarType_SEQ', COALESCE((SELECT MAX(id)+1 FROM cartype), 1), false);
+SELECT setval('Brand_SEQ', COALESCE((SELECT MAX(id)+1 FROM brand), 1), false);
+SELECT setval('Color_SEQ', COALESCE((SELECT MAX(id)+1 FROM color), 1), false);
+

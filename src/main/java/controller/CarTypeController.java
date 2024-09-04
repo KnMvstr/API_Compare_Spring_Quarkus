@@ -75,20 +75,4 @@ public class CarTypeController {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating brand: " + e.getMessage()).build();
         }
     }
-
-    @DELETE
-    @Path("/delete/{id}")
-    public Response deleteCartype(@PathParam("id") Long id) {
-        try {
-            boolean deleted = CarType.deleteById(id);
-            if (!deleted) {
-                throw new EntityNotFoundException("CarType not found with ID: " + id);
-            }
-            return Response.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error deleting carType: " + e.getMessage()).build();
-        }
-    }
 }
