@@ -15,7 +15,7 @@ import java.util.Map;
 public class TokenUtils {
 
     public static String generateTokenString(JwtClaims claims) throws Exception {
-        //use the privat key associated with the public key for a valid signature
+        //use the private key associated with the public key for a valid signature
         PrivateKey privateKey = KeyUtils.readPrivateKey("/PrivateKey.pem");
         return generateTokenString(privateKey, "/PrivateKey.pem", claims);
 
@@ -33,7 +33,7 @@ public class TokenUtils {
         jws.setPayload(claims.toJson());
         jws.setKey(privateKey);
         jws.setKeyIdHeaderValue(kid);
-        jws.setHeader("typ", "JWT");
+        jws.setHeader("type", "JWT");
         jws.setAlgorithmHeaderValue(AlgorithmIdentifiers.RSA_PSS_USING_SHA256);
 
         return jws.getCompactSerialization();
