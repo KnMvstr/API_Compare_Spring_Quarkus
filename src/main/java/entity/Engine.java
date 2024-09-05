@@ -2,10 +2,8 @@ package entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import dto.BrandDTO;
 import dto.EngineDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.panache.common.Sort;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -96,6 +94,9 @@ public class Engine extends PanacheEntity {
         dto.setName(engine.name);
         dto.setFuelType(engine.fuelType);
         dto.setPower(engine.power);
+        dto.setModelNames(engine.getModels() != null
+                ? engine.getModels().stream().map(Model::getName).collect(Collectors.toList())
+                : null);
         return dto;
     }
 }

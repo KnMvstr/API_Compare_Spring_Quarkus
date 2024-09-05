@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.github.slugify.Slugify;
-import dto.BrandDTO;
 import dto.CarTypeDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.panache.common.Sort;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -89,6 +87,9 @@ public class CarType extends PanacheEntity {
         CarTypeDTO dto = new CarTypeDTO();
         dto.setId(carType.id);
         dto.setName(carType.name);
+        dto.setModelNames(carType.getModels() != null
+                ? carType.getModels().stream().map(Model::getName).collect(Collectors.toList())
+                : null);
         return dto;
     }
 

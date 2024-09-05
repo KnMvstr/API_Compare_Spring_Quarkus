@@ -92,6 +92,9 @@ public class Color extends PanacheEntity {
         dto.setName(color.name);
         dto.setRvbRef(color.rvbRef);
         dto.setHexRef(color.hexRef);
+        dto.setModelNames(color.getModels() != null
+                ? color.getModels().stream().map(Model::getName).collect(Collectors.toList())
+                : null);
         return dto;
     }
 }

@@ -109,6 +109,9 @@ public class Brand extends PanacheEntity {
         BrandDTO dto = new BrandDTO();
         dto.setId(brand.id);
         dto.setName(brand.name);
+        dto.setModelNames(brand.getModels() != null
+                ? brand.getModels().stream().map(Model::getName).collect(Collectors.toList())
+                : null);
         return dto;
     }
 }
