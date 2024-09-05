@@ -1,4 +1,4 @@
-package service.userinit;
+package entity.userinit;
 
 import entity.Role;
 import entity.User;
