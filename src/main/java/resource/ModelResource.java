@@ -1,4 +1,4 @@
-package controller;
+package resource;
 
 import dto.ModelDTO;
 import entity.Model;
@@ -16,7 +16,7 @@ import java.util.List;
 @Path("/api/v2/models")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ModelController {
+public class ModelResource {
 
     @GET
     @Path("/all")

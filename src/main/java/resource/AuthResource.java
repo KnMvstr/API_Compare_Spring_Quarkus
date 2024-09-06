@@ -1,4 +1,4 @@
-package controller;
+package resource;
 
 import authentication.AuthResponse;
 import authentication.token.TokenService;
@@ -13,7 +13,7 @@ import service.UserService;
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AuthController {
+public class AuthResource {
 
     @Inject
     UserService userService;

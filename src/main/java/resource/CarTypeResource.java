@@ -1,4 +1,4 @@
-package controller;
+package resource;
 
 import dto.CarTypeDTO;
 import entity.CarType;
@@ -16,7 +16,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/v2/cartypes")
-public class CarTypeController {
+public class CarTypeResource  {
 
     @GET
     @Path("/all")

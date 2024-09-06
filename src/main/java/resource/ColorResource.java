@@ -1,4 +1,4 @@
-package controller;
+package resource;
 
 import dto.ColorDTO;
 import entity.Color;
@@ -16,7 +16,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/v2/colors")
-public class ColorController {
+public class ColorResource  {
 
     @GET
     @Path("/all")

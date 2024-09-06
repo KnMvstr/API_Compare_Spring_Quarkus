@@ -1,6 +1,5 @@
-package controller;
+package resource;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import dto.UserAuthDTO;
 import dto.UserDTO;
 import jakarta.annotation.security.RolesAllowed;
@@ -15,7 +14,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/v2/users")
-public class UserController {
+public class UserResource  {
 
     @Inject
     UserService userService;

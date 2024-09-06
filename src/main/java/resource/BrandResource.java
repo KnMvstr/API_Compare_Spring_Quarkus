@@ -1,4 +1,4 @@
-package controller;
+package resource;
 
 import dto.BrandDTO;
 import entity.Brand;
@@ -16,7 +16,7 @@ import java.util.List;
 @Path("/api/v2/brands")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class BrandController {
+public class BrandResource  {
 
     @GET
     @Path("/all")

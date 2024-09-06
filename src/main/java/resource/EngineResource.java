@@ -1,8 +1,6 @@
-package controller;
+package resource;
 
-import dto.BrandDTO;
 import dto.EngineDTO;
-import entity.Brand;
 import entity.Engine;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceException;
@@ -18,7 +16,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/v2/engines")
-public class EngineController {
+public class EngineResource {
 
     @GET
     @Path("/all")
