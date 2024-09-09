@@ -11,7 +11,7 @@
 	<groupId>car-model</groupId>
 	<artifactId>API_Compare_Spring_Quarkus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>car-model</name>
 	<description>SpringBoot / Quarkus </description>
 	<properties>
@@ -124,6 +124,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<executable>true</executable>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
