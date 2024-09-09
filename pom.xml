@@ -106,10 +106,17 @@
             <version>1.18.32</version>
         </dependency>
 
+        <!-- Sluggifier with included ICU4J dependcies for native image -->
         <dependency>
             <groupId>com.github.slugify</groupId>
             <artifactId>slugify</artifactId>
             <version>3.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>72.1</version>
         </dependency>
     </dependencies>
 
