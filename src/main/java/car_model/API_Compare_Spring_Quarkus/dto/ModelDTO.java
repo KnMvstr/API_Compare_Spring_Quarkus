@@ -1,12 +1,16 @@
 package car_model.API_Compare_Spring_Quarkus.dto;
 
-import car_model.API_Compare_Spring_Quarkus.entity.*;
+import car_model.API_Compare_Spring_Quarkus.entity.Brand;
+import car_model.API_Compare_Spring_Quarkus.entity.CarType;
+import car_model.API_Compare_Spring_Quarkus.entity.Color;
+import car_model.API_Compare_Spring_Quarkus.entity.Engine;
 import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data

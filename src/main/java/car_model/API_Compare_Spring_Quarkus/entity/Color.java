@@ -1,7 +1,9 @@
 package car_model.API_Compare_Spring_Quarkus.entity;
 
 import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

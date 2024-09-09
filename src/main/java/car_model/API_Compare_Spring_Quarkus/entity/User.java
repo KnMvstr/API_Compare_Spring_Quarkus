@@ -1,7 +1,6 @@
 package car_model.API_Compare_Spring_Quarkus.entity;
 
 import car_model.API_Compare_Spring_Quarkus.json_views.JsonViews;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,9 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
