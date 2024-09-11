@@ -130,6 +130,7 @@ public class UserService {
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
         dto.setRole(toRoleDTO(user.getRole()));
         return dto;
     }
