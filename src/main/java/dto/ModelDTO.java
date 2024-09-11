@@ -17,13 +17,13 @@ public class ModelDTO {
     @NotBlank(message = "Specify the model name")
     private String name;
 
-    private String brandName;
+    private Long brandId;
 
-    private String engineName;
+    private Long engineId;
 
-    private List<String> colorNames;
+    private List<Long> colorId;
 
-    private List<String> carTypeNames;
+    private List<Long> carTypeId;
 
     private Set<Transmission> transmissions;
 }
