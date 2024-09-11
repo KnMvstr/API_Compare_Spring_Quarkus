@@ -3,6 +3,7 @@ package controller;
 
 import dto.ModelDTO;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -32,21 +33,32 @@ public class ModelController {
     @POST
     @Path("/create")
     public Response createModel(@Valid ModelDTO model) {
-        ModelDTO newModel = modelService.persist(model, null);
-        return Response.status(Response.Status.CREATED).entity(newModel).build();
+        try {
+            ModelDTO newModel = modelService.persist(model, null);
+            return Response.status(Response.Status.CREATED).entity(newModel).build();
+        } catch (IllegalArgumentException | EntityNotFoundException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
     }
 
     @PUT
     @Path("/edit/{id}")
     public Response updateModel(@PathParam("id") Long id, @Valid ModelDTO model) {
-        ModelDTO updatedModel = modelService.persist(model, id);
-        return Response.status(Response.Status.ACCEPTED).entity(updatedModel).build();
+        try {
+            ModelDTO updatedModel = modelService.persist(model, id);
+            return Response.status(Response.Status.ACCEPTED).entity(updatedModel).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 
     @DELETE
     @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {
-        modelService.delete(id);
-        return Response.status(Response.Status.ACCEPTED).build();
-    }
+        try {
+            modelService.delete(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Model not found").build();
+        }}
 }
