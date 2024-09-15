@@ -1,8 +1,6 @@
 package service;
 
-import dto.BrandDTO;
 import dto.ColorDTO;
-import entity.Brand;
 import entity.Color;
 import entity.Model;
 import io.quarkus.panache.common.Sort;
@@ -11,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import repository.ColorRepository;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

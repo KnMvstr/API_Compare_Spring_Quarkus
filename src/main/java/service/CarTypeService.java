@@ -1,9 +1,6 @@
 package service;
 
-import dto.BrandDTO;
 import dto.CarTypeDTO;
-import entity.Brand;
-import entity.CarType;
 import entity.CarType;
 import entity.Model;
 import io.quarkus.panache.common.Sort;

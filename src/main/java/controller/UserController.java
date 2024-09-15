@@ -1,6 +1,5 @@
 package controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import dto.UserAuthDTO;
 import dto.UserDTO;
 import jakarta.annotation.security.RolesAllowed;
@@ -10,6 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import service.UserService;
+
 import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)

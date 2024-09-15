@@ -1,8 +1,6 @@
 package service;
 
-import dto.BrandDTO;
 import dto.EngineDTO;
-import entity.Brand;
 import entity.Engine;
 import entity.Model;
 import io.quarkus.panache.common.Sort;

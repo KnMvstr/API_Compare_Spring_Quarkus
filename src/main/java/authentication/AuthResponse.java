@@ -1,7 +1,8 @@
 package authentication;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor

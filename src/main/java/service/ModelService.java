@@ -2,8 +2,8 @@ package service;
 
 import dto.ModelDTO;
 import entity.CarType;
-import entity.Model;
 import entity.Color;
+import entity.Model;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,7 +11,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import repository.*;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;

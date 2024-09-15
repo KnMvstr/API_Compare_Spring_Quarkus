@@ -1,7 +1,6 @@
 package controller;
 
 import dto.EngineDTO;
-import entity.Engine;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;

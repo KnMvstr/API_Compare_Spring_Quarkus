@@ -1,7 +1,6 @@
 package repository;
 
 import entity.Color;
-import entity.Model;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 
