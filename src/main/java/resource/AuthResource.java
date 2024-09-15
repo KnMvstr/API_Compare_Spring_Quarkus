@@ -1,3 +1,4 @@
+
 package resource;
 
 import authentication.AuthResponse;
@@ -8,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import service.UserService;
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)

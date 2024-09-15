@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
+        property = "name"
 )
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

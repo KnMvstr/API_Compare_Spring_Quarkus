@@ -29,8 +29,8 @@ public class EngineResource {
     @Path("/{id}")
     public Response getEngineById(@PathParam("id") Long id) {
         try {
-        EngineDTO engine = Engine.getEngineById(id);
-        return Response.ok(engine).build();
+            EngineDTO engine = Engine.getEngineById(id);
+            return Response.ok(engine).build();
         } catch (EntityNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
@@ -43,7 +43,6 @@ public class EngineResource {
         try {
             Engine engine = new Engine();
             engine.setName(engineDTO.getName());
-            engine.setPower(engineDTO.getPower());
             engine.persist();
             return Response.status(Response.Status.CREATED).entity(Engine.toDTO(engine)).build();
         } catch (PersistenceException pe) {
