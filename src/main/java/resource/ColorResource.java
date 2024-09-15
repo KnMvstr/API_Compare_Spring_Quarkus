@@ -43,8 +43,8 @@ public class ColorResource  {
         try {
             Color color = new Color();
             color.setName(colorDTO.getName());
+            color.setRvbRef(color.getRvbRef()); // Live coding scenario 2
             color.setHexRef(colorDTO.getHexRef());
-            color.setRvbRef(color.getRvbRef());
             color.persist();
             return Response.status(Response.Status.CREATED).entity(Color.toDTO(color)).build();
         } catch (PersistenceException pe) {

@@ -139,7 +139,7 @@ public class Model extends PanacheEntity {
         model.setTransmissions(modelDTO.getTransmissions());
         Model.persist(model);
 
-        // Retourner le DTO mis à jour
+        // Return the updated DTO
         return toDTO(model);
     }
 

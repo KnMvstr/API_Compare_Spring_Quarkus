@@ -43,6 +43,7 @@ public class EngineResource {
         try {
             Engine engine = new Engine();
             engine.setName(engineDTO.getName());
+            engine.setPower(engineDTO.getPower());
             engine.persist();
             return Response.status(Response.Status.CREATED).entity(Engine.toDTO(engine)).build();
         } catch (PersistenceException pe) {

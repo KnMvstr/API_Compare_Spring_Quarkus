@@ -39,7 +39,7 @@ public class BrandResource  {
     @POST
     @Transactional
     @Path("/create")
-    public Response createBrand(BrandDTO brandDTO) {
+    public Response createBrand(@Valid BrandDTO brandDTO) {
         try {
             Brand brand = new Brand();
             brand.setName(brandDTO.getName());

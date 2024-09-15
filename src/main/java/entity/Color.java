@@ -88,7 +88,7 @@ public class Color extends PanacheEntity {
 
     public static ColorDTO toDTO(Color color) {
         ColorDTO dto = new ColorDTO();
-        //dto.setId(color.id);
+        //dto.setId(color.id); //Live Coding Scenario 1
         dto.setName(color.name);
         dto.setRvbRef(color.rvbRef);
         dto.setHexRef(color.hexRef);
