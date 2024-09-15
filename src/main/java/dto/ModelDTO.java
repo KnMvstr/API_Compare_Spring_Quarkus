@@ -1,6 +1,6 @@
 package dto;
 
-import entity.*;
+import entity.Transmission;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
