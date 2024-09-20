@@ -21,6 +21,7 @@ public class UserPostDTO {
     @Size(message = "The password must have at least 5 characters", min = 5)
     private String password;
 
+    @JsonIgnore
     private boolean admin; // This field represents whether the user is an admin act like a toggle
 
     @JsonIgnore //Must be hidden in the swagger
